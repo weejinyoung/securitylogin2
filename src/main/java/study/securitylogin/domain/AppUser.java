@@ -14,12 +14,12 @@ import java.util.UUID;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Member implements UserDetails {
+public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "member_id")
+    @Column(name = "user_id")
     private UUID id;
 
     @Column(unique = true, nullable = false)
@@ -39,7 +39,7 @@ public class Member implements UserDetails {
     private Role role;
 
     @Builder
-    public Member(String oAuth2Id, String email, String nickname, String profileImageUrl, String introduction, Role role) {
+    public AppUser(String oAuth2Id, String email, String nickname, String profileImageUrl, String introduction, Role role) {
         this.oAuth2Id = oAuth2Id;
         this.email = email;
         this.nickname = nickname;
