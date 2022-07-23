@@ -10,9 +10,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.securitylogin.domain.AppUser;
+import study.securitylogin.dto.TestUserDto;
 import study.securitylogin.repository.UserRepository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -30,5 +32,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<AppUser> appUser = userRepository.findByEmail(email);
         return appUser.orElseThrow(() ->new UsernameNotFoundException("유저를 찾을 수 없습니다."));
+    }
+
+    public UUID saveUserTest(TestUserDto dto) {
+        AppUser appUser = userRepository.save(dto.toEntity());
+        return appUser.getId();
     }
 }
