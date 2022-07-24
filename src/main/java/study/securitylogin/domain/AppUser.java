@@ -30,6 +30,8 @@ public class AppUser implements UserDetails {
 
     private String nickname;
 
+    private String password;
+
     private String profileImageUrl;
 
     private String introduction;
@@ -39,9 +41,10 @@ public class AppUser implements UserDetails {
     private Role role;
 
     @Builder
-    public AppUser(String oAuth2Id, String email, String nickname, String profileImageUrl, String introduction, Role role) {
+    public AppUser(String oAuth2Id, String email, String password, String nickname, String profileImageUrl, String introduction, Role role) {
         this.oAuth2Id = oAuth2Id;
         this.email = email;
+        this.password = password;
         this.nickname = nickname;
         this.profileImageUrl = profileImageUrl;
         this.introduction = introduction;
@@ -55,12 +58,12 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override

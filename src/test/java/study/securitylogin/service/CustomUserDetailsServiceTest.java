@@ -27,6 +27,7 @@ class CustomUserDetailsServiceTest {
         TestUserDto dto = TestUserDto.builder().
                 oAuth2Id("isk06277").
                 email("a8118199@gmail.com").
+                password("004637").
                 introduction("hi").
                 nickname("wee").
                 profileImageUrl("ewadsawf").
