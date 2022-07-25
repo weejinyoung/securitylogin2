@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.securitylogin.domain.AppUser;
+import study.securitylogin.dto.AppUserDto;
 import study.securitylogin.dto.TestUserDto;
 import study.securitylogin.repository.UserRepository;
 
@@ -32,5 +33,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UUID saveUserTest(TestUserDto dto) {
         AppUser appUser = userRepository.save(dto.toEntity());
         return appUser.getId();
+    }
+
+    public UUID saveUser(AppUserDto dto) {
+
+        AppUser saveUser = userRepository.save(dto.toEntity());
+        return saveUser.getId();
     }
 }

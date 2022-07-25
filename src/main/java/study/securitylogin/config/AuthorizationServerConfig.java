@@ -24,21 +24,18 @@ public class AuthorizationServerConfig {
 
     @Bean
     public SecurityFilterChain authServerSecurityFilterChain(HttpSecurity http) throws Exception{
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+//        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/register").authenticated()
-                .antMatchers("/admin").hasRole(Role.ADMIN.getKey())
-                .antMatchers("/my").hasRole(Role.MEMBER.getKey())
+                .antMatchers("/register/**").authenticated()
+                .antMatchers("/admin/**").hasAnyRole((Role.ADMIN.getKey()))
+                .antMatchers("/my/**").hasAnyRole(Role.MEMBER.getKey(), Role.ADMIN.getKey())
                 .anyRequest().permitAll();
 
         http.formLogin()
-                .loginPage("/login")
-                .successForwardUrl("/home")
-                .failureForwardUrl("/login")
-                .permitAll();
-
+                .loginPage("/login-page")
+                .defaultSuccessUrl("/home");
 
         return http.build();
     }
