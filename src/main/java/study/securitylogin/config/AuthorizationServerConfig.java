@@ -11,11 +11,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import study.securitylogin.domain.Role;
+import study.securitylogin.service.CustomOauth2UserService;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class AuthorizationServerConfig {
+
+    private final CustomOauth2UserService customOauth2UserService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -35,7 +38,13 @@ public class AuthorizationServerConfig {
 
         http.formLogin()
                 .loginPage("/login-page")
+                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/home");
+
+        http.oauth2Login()
+                .loginPage("/login-page")
+                .userInfoEndpoint()
+                .userService(customOauth2UserService);
 
         return http.build();
     }
