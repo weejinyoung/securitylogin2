@@ -38,8 +38,8 @@ public class AuthorizationServerConfig {
 
         http.formLogin()
                 .loginPage("/login-page")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/home");
+                .loginProcessingUrl("/login-success")
+                .defaultSuccessUrl("/login-page");
 
         http.oauth2Login()
                 .loginPage("/login-page")
